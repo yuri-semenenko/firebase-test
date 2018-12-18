@@ -187,7 +187,7 @@
                     document.getElementById('newUserEmail').value = '';
                 }
 
-                if (event.target && event.target.className === 'delete') {
+                if (event.target && event.target.classList.contains('delete')) {
                     event.preventDefault();
                     event.stopPropagation();
                     myAppModel.deleteUser(event.target.parentElement.parentElement.dataset.id);
