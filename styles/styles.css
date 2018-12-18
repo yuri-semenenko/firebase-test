@@ -15,7 +15,7 @@ body {
 	background-color: red;
 }
 
-.table th {
+.table thead th {
 	background-color: gray;
 	color: #fff;
 }

@@ -58,7 +58,7 @@
         }
 
         this.printUser = function(user) {
-            let userListContainer = document.getElementById('users-list'),
+            let userListContainer = document.getElementById('users-list__container'),
                 row = document.createElement('tr'),
                 td1 = document.createElement('td'),
                 td2 = document.createElement('td'),
@@ -81,24 +81,28 @@
                         <div class="users-list">
                             <h4 class="title is-4">Список пользователей:</h4>
                             <table id="users-list" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                                <tr>
-                                    <th>Пользователь</th>
-                                    <th>email</th>
-                                    <th></th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Пользователь</th>
+                                        <th>email</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-list__container"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
                 `;
-                userListContainer = document.getElementById('users-list');
+                userListContainer = document.getElementById('users-list__container');
                 userListContainer.appendChild(row);
             }
             
         }
 
         this.clearUserList = function() {
-            document.getElementById('users-list').innerHTML = '';
+            let container = document.getElementById('users-list__container');
+            if (container) container.innerHTML = '';
         }
     }
 
@@ -135,6 +139,7 @@
             .catch(function (error) {
                 console.error("Ошибка удаления пользователя: ", error);
             });
+
             this.updateUsersList();
         }
 
@@ -155,6 +160,9 @@
                 querySnapshot.forEach(function (doc) {
                     myAppView.printUser(doc);
                 });
+            })
+            .catch(function (error) {
+                console.log("Что то пошло не так: " + error);
             });
         }
 
