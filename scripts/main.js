@@ -108,11 +108,11 @@
 
     function AppModel() {
         let myAppView = null,
-            usersList = [],
-            isUsersList = false;
+            usersList = [];
 
         this.init = function (view) {
             myAppView = view;
+            this.getUsersList();
             this.printUsersList();
         }
 
@@ -121,7 +121,7 @@
                 userName: `${username}`,
                 email: `${useremail}`,
             })
-            .then(function () {
+            .then(function (username) {
                 console.log("Пользователь добавлен в коллецию users");
             })
             .catch(function (error) {
@@ -148,9 +148,10 @@
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     usersList.push(doc.data());
+                    console.log(`${doc.id} => ${doc.data().userName} \(${doc.data().email}\)`);
                 });
             });
-
+            console.log('Users List: ');
             console.log(usersList);
         }
 
@@ -181,18 +182,19 @@
         this.init = function (app, model) {
             myAppModel = model;
             appContainer = app;
-            form = document.querySelector('#addNewUser');
-            addBtn = document.querySelector('#addBtn');
 
             document.addEventListener('click', function(event) {
+                form = appContainer.querySelector('#addNewUser');
+                addBtn = appContainer.querySelector('#addBtn');
+
                 if (event.target && event.target.id === 'addBtn') {
                     event.preventDefault();
                     myAppModel.addUser(
-                        document.getElementById('newUserName').value,
-                        document.getElementById('newUserEmail').value
+                        form.newUserName.value,
+                        form.newUserName.value
                     );
-                    document.getElementById('newUserName').value = '';
-                    document.getElementById('newUserEmail').value = '';
+                    form.newUserName.value = '';
+                    form.newUserName.value = '';
                 }
 
                 if (event.target && event.target.classList.contains('delete')) {
@@ -219,7 +221,7 @@
             myAppModel.addUser('user test', 'usertest@gmail.com');
             myAppModel.addUser('Yuri', 'mymail@gmail.com');
             myAppModel.addUser('Vasya', 'vasya1991@gmail.com');
-            myAppModel.addUser('Lena', 'golovach@gmail.com');*/
+            myAppModel.addUser('Lena', 'lenusik@gmail.com');*/
         },
     };
 
