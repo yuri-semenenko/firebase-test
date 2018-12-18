@@ -1,0 +1,25 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.users-list a {
+	margin-left: 10px;
+	text-decoration: none;
+	color: blue;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.users-list a:hover {
+	text-decoration: none;
+	background-color: red;
+}
+
+.table th {
+	background-color: gray;
+	color: #fff;
+}
+
+.table td:last-child {
+	text-align: center;
+}
